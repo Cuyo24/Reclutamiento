@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans     
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop 
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx 
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+       ">
+
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    -->
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">controlador</prop>
+                <prop key="indexPostulante.htm">controlador</prop>
+                <prop key="principalAdmin.htm">controlador</prop>
+                <prop key="vacante.htm">controlador</prop>
+                <prop key="postulante.htm">controlador</prop>
+                <prop key="deletePostulante.htm">postulanteController</prop>
+                <prop key="AddAdmin.htm">controlador</prop>
+                <prop key="personal.htm">controlador</prop>
+                <prop key="principalPostulante.htm">controlador</prop>
+                <prop key="pruebasPostulante.htm">controlador</prop>
+                <prop key="pruebas.htm">controlador</prop>
+                <prop key="pruebaJunior.htm">controlador</prop>
+                <prop key="pruebaMedio.htm">controlador</prop>
+                <prop key="pruebaSenior.htm">controlador</prop>
+                <prop key="registro.htm">controlador</prop>
+                <prop key="logout.htm">controlador</prop>
+                <prop key="logoutP.htm">controlador</prop>
+                <prop key="sesionRequired.htm">controlador</prop>
+                <prop key="recuperarContrasena.htm">controlador</prop>
+                <prop key="crearPruebasAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="regresaPruebasAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="nuevaPruebaAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="borraPruebaAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="actualizaPruebaAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="creaPreguntaAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="creaRespuestaAdmin.htm">pruebasAdministradorController</prop>
+                <prop key="getPrueba.htm">pruebasAdministradorController</prop>
+                <prop key="readVacante.htm">vacanteController</prop>
+                <prop key="createVacante.htm">vacanteController</prop>
+                <prop key="updateVacante.htm">vacanteController</prop>
+                <prop key="deleteVacante.htm">vacanteController</prop>
+                <prop key="readInvitacion.htm">invitacionController</prop>
+                <prop key="editInvitacion.htm">invitacionController</prop>
+                <prop key="deleteInvitacion.htm">invitacionController</prop>
+                <prop key="invitacion.htm">invitacionController</prop>
+                <prop key="readSin_Invitacion.htm">invitacionController</prop>
+                <prop key="createInvitacion.htm">invitacionController</prop>
+                <prop key="readPostulante.htm">postulanteController</prop>
+                <prop key="createPostulante.htm">postulanteController</prop>
+                <prop key="updatePostulante.htm">postulanteController</prop>
+                <prop key="createAdmin.htm">addAdminController</prop>
+                <prop key="readAdmin.htm">personalController</prop>
+                <prop key="updateAdmin.htm">personalController</prop>
+                <prop key="deleteAdmin.htm">personalController</prop>
+                <prop key="readVacante1.htm">personalController</prop>
+                <prop key="visualizar.htm">visualizarController</prop>
+                <prop key="visualizarPruebasPostulante.htm">visualizarController</prop>
+                <prop key="visualizarRespuestas.htm">visualizarController</prop>
+                <prop key="prueba.htm">controlador</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/jsp/"
+          p:suffix=".jsp" />
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
+    <!--
+    The index controller.
+    -->
+   
+    <bean name="controlador" class="com.b1soft.Controlador"/>
+    <bean name="pruebasAdministradorController" class="com.b1soft.PruebasAdministradorController"/>
+    <bean name="vacanteController" class="com.b1soft.VacanteController"/>
+    <bean name="invitacionController" class="com.b1soft.InvitacionController"/>
+    <bean name="postulanteController" class="com.b1soft.PostulanteController"/>
+    <bean name="addAdminController" class="com.b1soft.AddAdminController"/>
+    <bean name="personalController" class="com.b1soft.PersonalController"/>
+    <bean name="pruebasPostulanteController" class="com.b1soft.pruebasPostulanteController"/>
+    <bean name="visualizarController" class="com.b1soft.VisualizarController"/>
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+    <mvc:annotation-driven/>
+    
+    <!-- Autowire -->
+    <context:annotation-config />
+    <context:component-scan base-package="com" />
+    <mvc:default-servlet-handler/>
+</beans>
